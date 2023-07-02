@@ -97,8 +97,27 @@ extension ViewController: UICollectionViewDataSource {
     }
 }
 
+extension ViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // didSelectItemAt : 특정 cell이 선택되었음을 알리는 method
+        guard let viewController = self.storyboard?.instantiateViewController(identifier: "DiaryDetailViewController") as? DiaryDetailViewController else {return} // viewController를 instance화 하고 DiaryDetailViewController 타입으로 타입 캐스팅
+        let diary = self.diarylist[indexPath.row] // 선택한 row 넘겨주기
+        viewController.diary = diary
+        viewController.indexPath = indexPath
+        viewController.delegate = self
+        self.navigationController?.pushViewController(viewController, animated: true) // 일기장 상세화면으로 이동하도록 push
+    }
+}
+
 extension ViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: (UIScreen.main.bounds.width / 2) - 20 , height: 200)
+    }
+}
+
+extension ViewController: DiaryDetailViewDelegate {
+    func didSelectDelete(indexPath: IndexPath) {
+        self.diarylist.remove(at: indexPath.row)
+        self.collectionView.deleteItems(at: [indexPath])
     }
 }
