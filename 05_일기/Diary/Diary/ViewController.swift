@@ -21,6 +21,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         self.configureCollectionView()
         self.loadDiaryList()
+        NotificationCenter.default.addObserver(self, selector: #selector(editDiaryNotifiaction(_:)), name: NSNotification.Name("editDiary"), object: nil)
     }
     
     private func configureCollectionView() {
@@ -28,6 +29,16 @@ class ViewController: UIViewController {
         self.collectionView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
+    }
+    
+    @objc func editDiaryNotifiaction(_ notification: Notification){
+        guard let diary = notification.object as? Diary else {return}
+        guard let row = notification.userInfo?["indexPath.row"] as? Int else {return}
+        self.diarylist[row] = diary
+        self.diarylist = self.diarylist.sorted(by: {
+            $0.date.compare($1.date) == .orderedDescending // 최신순으로 정렬
+        })
+        self.collectionView.reloadData()
     }
 
     // segueway 방식으로 화면 이동하기 때문에 필요

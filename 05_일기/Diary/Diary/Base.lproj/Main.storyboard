@@ -101,7 +101,7 @@
         <!--일기 작성-->
         <scene sceneID="Oep-bo-O2Z">
             <objects>
-                <viewController id="xl4-tU-ilb" customClass="WriteDiaryViewController" customModule="Diary" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WriteDiaryViewController" id="xl4-tU-ilb" customClass="WriteDiaryViewController" customModule="Diary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rf4-H7-fIF">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -411,7 +411,7 @@
                     <connections>
                         <outlet property="contentsTextView" destination="jHH-IA-Wx8" id="S2c-CR-fiZ"/>
                         <outlet property="dateLabel" destination="wvk-TZ-vc4" id="7BA-Ia-x6s"/>
-                        <outlet property="titleLabel" destination="aiw-Hv-dR0" id="A4f-fm-JQx"/>
+                        <outlet property="titleLabel" destination="Mxt-WP-zw9" id="Uo6-dq-zMl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mTk-9o-HOf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

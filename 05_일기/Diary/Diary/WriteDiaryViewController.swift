@@ -7,6 +7,11 @@
 
 import UIKit
 
+enum DiaryEditorMode {
+    case new
+    case edit(IndexPath, Diary)
+}
+
 protocol WriteDiaryViewDelegate: AnyObject {
     func didSelectRegister(diary: Diary)
 }
@@ -21,13 +26,36 @@ class WriteDiaryViewController: UIViewController {
     private let datePicker = UIDatePicker()
     private var diaryDate: Date?
     weak var delegate: WriteDiaryViewDelegate?
+    var diaryEditorMode: DiaryEditorMode = .new
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureContentsTextView()
         self.configureDatePicker()
         self.configureInputField()
+        self.configureEditorMode()
         self.confirmButton.isEnabled = false // 처음에는 아무것도 등록 안 되어 있으니까 비활성화
+    }
+    
+    private func configureEditorMode() {
+        switch self.diaryEditorMode {
+        case let .edit(_, diary):
+            self.titleTextField.text = diary.title
+            self.contentsTextView.text = diary.contents
+            self.dateTextField.text = self.dateToString(date: diary.date)
+            self.diaryDate = diary.date
+            self.confirmButton.title = "수정"
+            
+        default:
+            break
+        }
+    }
+    
+    private func dateToString(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yy년 MM월 dd일(EEEEE)"
+        formatter.locale = Locale(identifier: "ko_KR")
+        return formatter.string(from: date)
     }
     
     private func configureContentsTextView() {
@@ -57,6 +85,20 @@ class WriteDiaryViewController: UIViewController {
         guard let date = self.diaryDate else { return }
         
         let diary = Diary(title: title, contents: contents, date: date, isStar: false)
+        
+        switch self.diaryEditorMode {
+        case .new:
+                self.delegate?.didSelectRegister(diary: diary)
+        case let .edit(indexPath, _):
+            NotificationCenter.default.post(
+                name: NSNotification.Name("editDiary"),
+                object: diary,
+                userInfo: [
+                    "indexPath.row": indexPath.row
+                    
+                ]
+            )
+        }
         self.delegate?.didSelectRegister(diary: diary)
         self.navigationController?.popViewController(animated: true) // 등록하면 전의 화면인 목록 화면으로 이동하도록
     }
