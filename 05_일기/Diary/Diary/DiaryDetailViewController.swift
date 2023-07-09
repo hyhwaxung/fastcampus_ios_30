@@ -7,10 +7,10 @@
 
 import UIKit
 
-protocol DiaryDetailViewDelegate: AnyObject {
-    func didSelectDelete(indexPath: IndexPath)
-    func didSelectStar(indexPath: IndexPath, isStar: Bool)
-}
+//protocol DiaryDetailViewDelegate: AnyObject {
+//    func didSelectDelete(indexPath: IndexPath)
+////    func didSelectStar(indexPath: IndexPath, isStar: Bool)
+//}
 
 class DiaryDetailViewController: UIViewController {
 
@@ -19,7 +19,7 @@ class DiaryDetailViewController: UIViewController {
     @IBOutlet weak var dateLabel: UILabel!
     var starButton: UIBarButtonItem?
     
-    weak var delegate: DiaryDetailViewDelegate?
+//    weak var delegate: DiaryDetailViewDelegate?
     
     var diary: Diary?
     var indexPath: IndexPath?
@@ -67,7 +67,12 @@ class DiaryDetailViewController: UIViewController {
     
     @IBAction func tabDeleteButton(_ sender: Any) {
         guard let indexPath = self.indexPath else {return}
-        self.delegate?.didSelectDelete(indexPath: indexPath)
+//        self.delegate?.didSelectDelete(indexPath: indexPath)
+        NotificationCenter.default.post(
+            name: NSNotification.Name("deleteDiary"),
+            object: indexPath,
+            userInfo: nil
+        )
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -81,7 +86,16 @@ class DiaryDetailViewController: UIViewController {
             self.starButton?.image = UIImage(systemName: "star.fill")
         }
         self.diary?.isStar = !isStar
-        self.delegate?.didSelectStar(indexPath: indexPath, isStar: self.diary?.isStar ?? false)
+//        self.delegate?.didSelectStar(indexPath: indexPath, isStar: self.diary?.isStar ?? false)
+        NotificationCenter.default.post(
+            name: NSNotification.Name("starDiary"),
+            object: [
+                "diary": self.diary, // 수정된 즐겨찾기 diary 객체를 전달 
+                "isStar": self.diary?.isStar ?? false,
+                "indexPath": indexPath
+            ],
+            userInfo: nil
+        )
     }
     
     deinit{
