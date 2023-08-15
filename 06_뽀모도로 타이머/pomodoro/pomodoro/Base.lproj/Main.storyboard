@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="pomodoro" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tomato" translatesAutoresizingMaskIntoConstraints="NO" id="0bV-0a-8jH">
+                                <rect key="frame" x="146.66666666666666" y="83" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="YtO-s4-SO0"/>
+                                    <constraint firstAttribute="height" constant="100" id="ipj-9i-wj4"/>
+                                </constraints>
+                            </imageView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LUV-hk-yI6">
+                                <rect key="frame" x="24" y="263" width="345" height="60"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="50"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="89u-I6-nQP">
+                                <rect key="frame" x="48" y="353" width="297" height="4"/>
+                            </progressView>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="countDownTimer" minuteInterval="1" style="wheels" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3qZ-uX-TtM">
+                                <rect key="frame" x="0.0" y="213" width="393" height="216"/>
+                            </datePicker>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="80" translatesAutoresizingMaskIntoConstraints="NO" id="MsQ-4g-gtu">
+                                <rect key="frame" x="24" y="453" width="345" height="34.333333333333314"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bgx-j8-aZK">
+                                        <rect key="frame" x="0.0" y="0.0" width="132.66666666666666" height="34.333333333333336"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="취소"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vji-gf-0O2">
+                                        <rect key="frame" x="212.66666666666663" y="0.0" width="132.33333333333337" height="34.333333333333336"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="시작"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="MsQ-4g-gtu" secondAttribute="trailing" constant="24" id="2Ni-NH-Q4E"/>
+                            <constraint firstItem="LUV-hk-yI6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="24" id="9aW-Zz-LeP"/>
+                            <constraint firstItem="MsQ-4g-gtu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="24" id="M2B-dp-m9B"/>
+                            <constraint firstItem="MsQ-4g-gtu" firstAttribute="top" secondItem="3qZ-uX-TtM" secondAttribute="bottom" constant="24" id="WQ8-aE-9Bp"/>
+                            <constraint firstItem="3qZ-uX-TtM" firstAttribute="top" secondItem="0bV-0a-8jH" secondAttribute="bottom" constant="30" id="X9Z-og-nv2"/>
+                            <constraint firstItem="89u-I6-nQP" firstAttribute="top" secondItem="LUV-hk-yI6" secondAttribute="bottom" constant="30" id="a9t-ep-6Pg"/>
+                            <constraint firstItem="LUV-hk-yI6" firstAttribute="centerX" secondItem="0bV-0a-8jH" secondAttribute="centerX" id="bJo-Tj-UMe"/>
+                            <constraint firstItem="LUV-hk-yI6" firstAttribute="top" secondItem="0bV-0a-8jH" secondAttribute="bottom" constant="80" id="euM-4j-pRA"/>
+                            <constraint firstItem="0bV-0a-8jH" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="gBq-RW-zPY"/>
+                            <constraint firstAttribute="trailing" secondItem="3qZ-uX-TtM" secondAttribute="trailing" id="imk-hu-406"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="89u-I6-nQP" secondAttribute="trailing" constant="48" id="k0D-Aa-ayN"/>
+                            <constraint firstItem="3qZ-uX-TtM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="vcQ-uE-taf"/>
+                            <constraint firstItem="89u-I6-nQP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="48" id="wbH-be-lP3"/>
+                            <constraint firstItem="0bV-0a-8jH" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="24" id="yoy-xH-qxt"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="21" y="4"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="tomato" width="42.666667938232422" height="42.666667938232422"/>
+    </resources>
+</document>
