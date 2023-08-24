@@ -22,6 +22,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var toggelButton: UIButton!
+    @IBOutlet weak var imageView: UIImageView!
     
     // 타이머에 설정된 시간을 초로 저장하는 프로퍼티
     // 60으로 초기화 하는 이유는 DatePicker의 default 값이 1min 이기 때문에
@@ -58,6 +59,13 @@ class ViewController: UIViewController {
                 self.timerLabel.text = String(format: "%02d:%02d:%02d", hour, minutes, seconds)
                 self.progressView.progress = Float(self.currentSeconds) / Float(self.duration)
                 
+                UIView.animate(withDuration: 0.5, delay: 0, animations: {
+                    self.imageView.transform = CGAffineTransform(rotationAngle: .pi) // 2D 이미지를 180도 회전 시키기
+                })
+                UIView.animate(withDuration: 0.5, delay: 0.5, animations: {
+                    self.imageView.transform = CGAffineTransform(rotationAngle: .pi * 2) // 2D 이미지를 360도 회전 시키기
+                })
+                
                 if self.currentSeconds <= 0 {
                     self.stopTimer()
                     AudioServicesPlaySystemSound(1005)
@@ -73,8 +81,14 @@ class ViewController: UIViewController {
         }
         self.timerStatus = .end
         self.cancelButton.isEnabled = false
-        self.setTimerInfoViewVisible(isHidden: true)
-        self.datePicker.isHidden = false
+//        self.setTimerInfoViewVisible(isHidden: true)
+//        self.datePicker.isHidden = false
+        UIView.animate(withDuration: 0.5, animations: {
+            self.timerLabel.alpha = 0
+            self.progressView.alpha = 0
+            self.datePicker.alpha = 1
+            self.imageView.transform = .identity // 이미지뷰 원상태로 돌리기 
+        })
         self.toggelButton.isSelected = false
         self.timer?.cancel()
         self.timer = nil
@@ -97,8 +111,13 @@ class ViewController: UIViewController {
         case .end:
             self.currentSeconds = self.duration
             self.timerStatus = .start
-            self.setTimerInfoViewVisible(isHidden: false)
-            self.datePicker.isHidden = true
+//            self.setTimerInfoViewVisible(isHidden: false)
+//            self.datePicker.isHidden = true
+            UIView.animate(withDuration: 0.5, animations: {
+                self.timerLabel.alpha = 1
+                self.progressView.alpha = 1
+                self.datePicker.alpha = 0
+            })
             self.toggelButton.isSelected = true
             self.cancelButton.isEnabled = true
             self.startTimer()
