@@ -33,7 +33,7 @@ struct Temp: Codable {
     let temp: Double
     let feelsLike: Double
     let minTemp: Double
-    let maxTemp: Double
+    let masTemp: Double
     
     enum CodingKeys: String, CodingKey {
         case temp
